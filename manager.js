@@ -53,18 +53,20 @@ const exit = () => {
 };
 
 /* Programme */
-menu();
+
+const manager = () => {
+    menu();
 
     rl.question("What do you want? ", (answer) => {
         if (answer == 1) {
             showtasks();
-            rl.close();
+            return manager();
         } 
         else if (answer == 2) {
             rl.question("Which task do you want to add? ", (newTask) => {
                 addtask();
                 console.log(tasks);
-                rl.close();
+                return manager();
             });
         } 
         else if (answer == 3) {
@@ -72,17 +74,20 @@ menu();
             rl.question("Which task do you want to delete? ", (whichTask) => {
                 deletetask();
                 console.log(tasks);
-                rl.close();
+                return manager();
             });
         } 
         else if (answer == 4) {
             console.log(tasks);
             rl.question("Which task do you want to mark as done? ", (doneTask) => {
                 taskdone();
-                rl.close();
+                return manager();
             });
         } 
         else if (answer == 5) {
             exit();
         }
     });
+}
+
+manager ();
